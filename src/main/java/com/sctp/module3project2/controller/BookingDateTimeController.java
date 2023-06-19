@@ -2,6 +2,8 @@ package com.sctp.module3project2.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,7 @@ public class BookingDateTimeController {
 
 
   @PostMapping("/create")
-  public ResponseEntity<Booking> saveBooking(@RequestBody Booking bookingData) {
+  public ResponseEntity<Booking> saveBooking(@Valid @RequestBody Booking bookingData) {
    
     Booking newBooking = dateTimeService.createBookingWithDateTime(bookingData);
     return new ResponseEntity<Booking>(newBooking, HttpStatus.CREATED);
@@ -55,9 +57,10 @@ public class BookingDateTimeController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Booking> updateBookingWithDateTime(@PathVariable Long id, @RequestBody Booking bookingData) {
+  public ResponseEntity<Booking> updateBookingWithDateTime(@Valid @PathVariable Long id, @RequestBody Booking bookingData) {
     Booking updatedBookingWithDateTime = dateTimeService.updateBookingWithDateTime(id, bookingData);
     return new ResponseEntity<>(updatedBookingWithDateTime, HttpStatus.OK);
 
   }
+}
 

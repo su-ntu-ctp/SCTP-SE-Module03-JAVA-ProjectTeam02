@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import com.sctp.module3project2.entity.Booking;
+import com.sctp.module3project2.entity.BookingDateTime;
 import com.sctp.module3project2.exception.BookingNotFoundException;
 import com.sctp.module3project2.repository.BookingRepository;
 
@@ -52,8 +53,23 @@ public class BookingServiceImpl implements BookingService {
         bookingToUpdate.setRemarks(booking.getRemarks());
         bookingToUpdate.setActivity(booking.getActivity());
         bookingToUpdate.setBerth(booking.getBerth());
-        bookingToUpdate.setBookingDateTime(booking.getBookingDateTime());
+        // comment out the next line by Bernard 
+        //bookingToUpdate.setBookingDateTime(booking.getBookingDateTime());
+        //
+
         // bookingToUpdate.setCreated_at(booking.getCreated_at());
+
+        // change by Bernard for datetime update so no new row is aded in BookingDateTime table
+        BookingDateTime datetimeInfo = booking.getBookingDateTime();
+
+        BookingDateTime datetime = new BookingDateTime(); 
+        datetime.setBookdate(datetimeInfo.getBookdate());
+        datetime.setBooktime(datetimeInfo.getBooktime());
+
+        bookingToUpdate.getBookingDateTime().setBookdate(datetime.getBookdate());      
+        bookingToUpdate.getBookingDateTime().setBooktime(datetime.getBooktime());
+        // end change by Bernard
+
 
         return bookingRepository.save(bookingToUpdate);
     }

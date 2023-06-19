@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,11 @@ public class BookingDateTime {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
-  // @NotBlank(message="booking date cannot be blank")
+  @NotBlank(message="booking date cannot be blank")
   @JsonFormat(pattern = "yyyy-MM-dd", shape = Shape.STRING)
   private String bookdate;
   
-  // @NotBlank(message="booking time cannot be blanks")
+  @NotBlank(message="booking time cannot be blanks")
   @JsonFormat(pattern = "HH:mm", shape= Shape.STRING)
   private String booktime;
 
@@ -64,13 +65,4 @@ public class BookingDateTime {
     this.booktime = booktime;
   }
   
-  
-  
-
-  
-
-  
-
-  
-
 }
