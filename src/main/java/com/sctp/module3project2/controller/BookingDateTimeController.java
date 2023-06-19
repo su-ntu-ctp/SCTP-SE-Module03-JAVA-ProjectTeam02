@@ -29,7 +29,7 @@ public class BookingDateTimeController {
   private BookingDateTimeService dateTimeService;
 
 
-  @PostMapping("/create")
+  @PostMapping("")
   public ResponseEntity<Booking> saveBooking(@Valid @RequestBody Booking bookingData) {
    
     Booking newBooking = dateTimeService.createBookingWithDateTime(bookingData);

@@ -19,13 +19,7 @@ public class BookingDateTimeServiceImpl implements BookingDateTimeService {
 
   @Override
   public Booking createBookingWithDateTime(Booking bookingData) {
-    // BookingDateTime datetimeInfo = bookingData.getDatetime();
-    // BookingDateTime datetime = new BookingDateTime(); // ;
-    // datetime.setBookdate(datetimeInfo.getBookdate());
-    // datetime.setBooktime(datetimeInfo.getBooktime());
-    // Booking newBooking = new Booking();
-    // newBooking.setVessel(bookingData.getVessel());
-    // newBooking.setDatetime(datetime);
+    
     Booking savedBooking = bookingRepository.save(bookingData);
     return savedBooking;
   }
@@ -53,7 +47,7 @@ public class BookingDateTimeServiceImpl implements BookingDateTimeService {
   }
 
   @Override
-  public Booking updateBookingWithDateTime(Long id, Booking bookingData) {
+  public Booking updateBookingWithDateTime(Long id, Booking booking) {
     
     Optional<Booking> wrappedBookingWithDateTimeToUpdate = bookingRepository.findById(id);
 
@@ -64,7 +58,11 @@ public class BookingDateTimeServiceImpl implements BookingDateTimeService {
     // Unwrap it
     Booking bookingWithDateTimeToUpdate = wrappedBookingWithDateTimeToUpdate.get();
 
-    BookingDateTime datetimeInfo = bookingData.getBookingDateTime();
+     bookingWithDateTimeToUpdate.setRemarks(booking.getRemarks());
+        bookingWithDateTimeToUpdate.setActivity(booking.getActivity());
+        bookingWithDateTimeToUpdate.setBerth(booking.getBerth());
+
+    BookingDateTime datetimeInfo = booking.getBookingDateTime();
 
     BookingDateTime datetime = new BookingDateTime(); 
     datetime.setBookdate(datetimeInfo.getBookdate());
